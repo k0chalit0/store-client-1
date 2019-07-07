@@ -11,7 +11,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class ClientComponent implements OnInit {
 
   clients: Client[];
-  displayedColumns = ['firstName', 'lastName', 'email'];
+  displayedColumns = ['firstName', 'lastName', 'email', 'telephone'];
   dataSource: Client[];
   newClientForm: FormGroup;
   newClient: Client;
@@ -29,7 +29,8 @@ export class ClientComponent implements OnInit {
     this.newClientForm = this.fb.group({
       firstName: ['', Validators.compose([ Validators.required, Validators.maxLength(20)])],
       lastName: ['', Validators.compose([Validators.required, Validators.maxLength(20) ])],
-      email: ['', Validators.compose( [Validators.required, Validators.email])]
+      email: ['', Validators.compose( [Validators.required, Validators.email])],
+      telephone: ['', []]
     });
   }
 
@@ -45,8 +46,11 @@ export class ClientComponent implements OnInit {
     this.newClientForm.reset({
       firstName: '',
       lastName: '',
-      email: ''
+      email: '',
+      telephone: ''
     });
+    const form: HTMLFormElement = document.getElementById('newClientForm') as HTMLFormElement;
+    form.reset();
   }
 
   getClients() {

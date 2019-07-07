@@ -49,6 +49,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {baseURL} from './shared/baseurl';
 import {HttpClientModule} from '@angular/common/http';
 import { ClientComponent } from './client/client.component';
+import { CampaignComponent } from './campaign/campaign.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { ClientComponent } from './client/client.component';
     HomeComponent,
     ContactComponent,
     LoginComponent,
-    ClientComponent
+    ClientComponent,
+    CampaignComponent
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule,

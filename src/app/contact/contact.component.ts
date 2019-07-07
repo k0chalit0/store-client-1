@@ -1,6 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ContactType, Message} from '../shared/message';
+import { ClientService } from '../services/client.service';
+import { Client } from '../shared/client';
+import { ContactService } from '../services/contact.service';
+import { ContactMessage } from '../shared/contactMessage';
 
 @Component({
   selector: 'app-contact',
@@ -13,7 +17,7 @@ export class ContactComponent implements OnInit {
   message: Message;
   contactType = ContactType;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private clientService: ClientService, private contactService: ContactService) {
     this.createForm();
   }
 
@@ -34,6 +38,27 @@ export class ContactComponent implements OnInit {
 
   onSubmit() {
     this.message = this.messageForm.value;
+    let client: Client;
+    client = {
+      firstName: this.message.firstname,
+      lastName: this.message.lastname,
+      email: this.message.email,
+      telephone: this.message.telnum ? this.message.telnum + '' : '',
+    };
+    let message: ContactMessage;
+    message = {contentMessage: this.message.text, clientId: null};
+
+    this.clientService.addClient(client).subscribe(
+      response => {
+          message.clientId = response.id;
+          this.contactService.addContactMessage(message).subscribe(
+            responsed => console.log('Success', responsed),
+            err => console.log(err)
+          );
+        },
+      err => console.log(err)
+    );
+
     console.log(this.message);
     this.messageForm.reset({
       firstname: '',
@@ -49,4 +74,7 @@ export class ContactComponent implements OnInit {
     form.reset();
   }
 
+  saveClient(client: Client) {
+
+  }
 }
