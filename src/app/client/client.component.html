@@ -1,0 +1,55 @@
+<div class="container">
+  <div fxFlex="50" *ngIf="clients">
+    <h1>Lista de Clientes</h1>
+
+    <div class="list-container mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="firstName">
+          <th mat-header-cell *matHeaderCellDef> firstName </th>
+          <td mat-cell *matCellDef="let client"> {{client.firstName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastName">
+          <th mat-header-cell *matHeaderCellDef> lastName </th>
+          <td mat-cell *matCellDef="let client"> {{client.lastName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef> email </th>
+          <td mat-cell *matCellDef="let client"> {{client.email}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+    </div>
+  </div>
+  <div fxFlex="5">
+  </div>
+  <div fxFlex="40">
+    <h1>Agregar Client</h1>
+    <div class="create-container mat-elevation-z0">
+    <form novalidate [formGroup]="newClientForm" (ngSubmit)="onSubmit()" id="newClientForm">
+        <mat-form-field>
+          <input matInput formControlName="firstName" type="text" placeholder="First Name">
+          <mat-error *ngIf="(newClientForm.get('firstName').hasError('required') && newClientForm.get('firstName').touched)">Field Is Required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput formControlName="lastName" type="text" placeholder="Last Name">
+          <mat-error *ngIf="(newClientForm.get('lastName').hasError('required') && newClientForm.get('lastName').touched)">Field Is Required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput formControlName="email" type="text" placeholder="Email">
+          <mat-error *ngIf="(newClientForm.get('email').hasError('email') && newClientForm.get('email').touched)">Format Invalid</mat-error>
+        </mat-form-field>
+        <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="newClientForm.invalid">
+          Enviar
+        </button>
+    </form>
+    </div>
+  </div>
+</div>

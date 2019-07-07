@@ -1,0 +1,25 @@
+.list-container {
+  height: 400px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.create-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-container > * {
+  width: 100%;
+}
+
+.mat-form-field {
+  display: block;
+}
+
+form{
+  padding: 2rem;
+}

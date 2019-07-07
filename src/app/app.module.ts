@@ -48,6 +48,7 @@ import {LoginComponent} from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {baseURL} from './shared/baseurl';
 import {HttpClientModule} from '@angular/common/http';
+import { ClientComponent } from './client/client.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import {HttpClientModule} from '@angular/common/http';
     AboutComponent,
     HomeComponent,
     ContactComponent,
-    LoginComponent
+    LoginComponent,
+    ClientComponent
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule,
